@@ -3,17 +3,19 @@ import 'package:flutter/widgets.dart';
 
 class MyOutlineButton extends StatelessWidget {
   final String label;
+  final onPressed;
 
   const MyOutlineButton({
     Key key,
     this.label,
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var color = Theme.of(context).primaryColor;
     return OutlineButton(
-      onPressed: () => null,
+      onPressed: this.onPressed,
       color: color,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
