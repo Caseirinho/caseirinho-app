@@ -4,10 +4,12 @@ class MyTextField extends StatelessWidget {
   final String labelText;
   final obscureText;
   final hintText;
+  final onChanged;
 
   const MyTextField({
     Key key,
     this.labelText,
+    this.onChanged,
     this.obscureText = false,
     this.hintText = "",
   }) : super(key: key);
@@ -15,6 +17,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       obscureText: this.obscureText,
       decoration: InputDecoration(
         labelText: labelText,

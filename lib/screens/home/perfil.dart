@@ -1,6 +1,6 @@
 import 'package:caseirinho_app/screens/cadastro_casa.dart';
 import 'package:caseirinho_app/screens/edicao_perfil.dart';
-import 'package:caseirinho_app/screens/login.dart';
+import 'package:caseirinho_app/screens/login/login.dart';
 import 'package:caseirinho_app/screens/troca_senha.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

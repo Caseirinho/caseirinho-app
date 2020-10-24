@@ -1,10 +1,7 @@
 import 'package:caseirinho_app/components/my_flat_button.dart';
-import 'package:caseirinho_app/components/my_outline_button.dart';
 import 'package:caseirinho_app/components/my_text_field.dart';
-import 'package:caseirinho_app/screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CadastroScreen extends StatefulWidget {
   @override
@@ -25,7 +22,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: Image(image: AssetImage('assets/logo.png'), height: 70,),
+              child: Image(
+                image: AssetImage('assets/logo.png'),
+                height: 70,
+              ),
             ),
             Center(
                 child: Text(
