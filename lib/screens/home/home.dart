@@ -2,6 +2,8 @@ import 'package:caseirinho_app/screens/cadastro_casa.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'busca.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -10,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -40,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).push(
                     CupertinoPageRoute(builder: (_) => CadastroCasaScreen()));
               },
-            )
+            ),
+            Busca(),
           ],
         ),
       ),
