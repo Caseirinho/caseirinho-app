@@ -35,7 +35,7 @@ class LoginView extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 30.0, left: 16, right: 16, bottom: 16),
+                      top: 8, left: 16, right: 16, bottom: 8),
                   child: SvgPicture.asset(
                     'assets/login_gravure.svg',
                   ),
@@ -45,7 +45,7 @@ class LoginView extends StatelessWidget {
                   onChanged: (value) => setUsername(value),
                 ),
                 SizedBox(
-                  height: 24,
+                  height: 8,
                 ),
                 MyTextField(
                   labelText: "Senha",
@@ -62,14 +62,14 @@ class LoginView extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 MyFlatButton(
                   label: "Entrar",
                   onPressed: login,
                 ),
                 SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 MyOutlineButton(
                   label: "Cadastrar",
