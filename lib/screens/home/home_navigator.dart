@@ -1,5 +1,6 @@
-import 'package:caseirinho_app/screens/home/home.dart';
-import 'package:caseirinho_app/screens/home/perfil.dart';
+import 'package:caseirinho_app/screens/home/busca_screen.dart';
+import 'package:caseirinho_app/screens/home/home_screen.dart';
+import 'package:caseirinho_app/screens/home/perfil_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class _HomeNavigatorState extends State<HomeNavigator> {
   Widget buildBody(BuildContext context) {
     var _children = <Widget>[
       HomeScreen(),
-      Container(child: Text("Busca")),
+      BuscaScreen(),
       PerfilScreen(),
     ];
 

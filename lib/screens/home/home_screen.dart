@@ -1,8 +1,9 @@
 import 'package:caseirinho_app/screens/cadastro_casa.dart';
+import 'package:caseirinho_app/screens/home/components/categorias.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'busca.dart';
+import 'components/section_title.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -43,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     CupertinoPageRoute(builder: (_) => CadastroCasaScreen()));
               },
             ),
-            Busca(),
+            SectionTitle("Categorias"),
+            Categorias(),
           ],
         ),
       ),
