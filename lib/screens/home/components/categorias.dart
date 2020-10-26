@@ -7,11 +7,11 @@ class Categorias extends StatelessWidget {
       children: [
         Row(
           children: [
-            buildCategoria("Marmitas"),
+            buildCategoria("Marmitas", AssetImage('assets/marmitas-food.jpg')),
             SizedBox(
               width: 10,
             ),
-            buildCategoria("Docinhos"),
+            buildCategoria("Docinhos", AssetImage('assets/docinhos-food.jpg')),
           ],
         ),
         SizedBox(
@@ -19,29 +19,39 @@ class Categorias extends StatelessWidget {
         ),
         Row(
           children: [
-            buildCategoria("Fit"),
+            buildCategoria("Fit", AssetImage('assets/fit-food.jpg')),
             SizedBox(
               width: 10,
             ),
-            buildCategoria("Presentinhos"),
+            buildCategoria(
+                "Presentinhos", AssetImage('assets/presentinhos-croche.jpg')),
           ],
         ),
       ],
     );
   }
 
-  Flexible buildCategoria(String nome) {
+  Flexible buildCategoria(String nome, AssetImage imagem) {
     return Expanded(
       child: InkWell(
         child: Container(
           height: 100,
           decoration: BoxDecoration(
-            color: Colors.red,
+            image: DecorationImage(
+              image: imagem,
+              fit: BoxFit.cover,
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(nome),
+            child: Text(
+              nome,
+              style: TextStyle(
+                  backgroundColor: Colors.white,
+                  fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ),

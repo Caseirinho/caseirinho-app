@@ -1,5 +1,6 @@
 import 'package:caseirinho_app/screens/cadastro_casa.dart';
 import 'package:caseirinho_app/screens/home/components/categorias.dart';
+import 'package:caseirinho_app/screens/home/components/populares.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +36,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Theme.of(context).accentColor,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                      "Aperte aqui para cadastrar sua Casa e começar a vender seus produtos"),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Cadastre sua Casa",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        )
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                          "Assim que cadastrar sua casa, você já pode começar a vender seus produtos",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          )
+                      ),
+                    ],
+                  ),
+
                 ),
               ),
               onTap: () {
@@ -44,8 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     CupertinoPageRoute(builder: (_) => CadastroCasaScreen()));
               },
             ),
-            SectionTitle("Categorias"),
+            SectionTitle("Categorias mais procuradas"),
             Categorias(),
+            SectionTitle("Os mais procurados"),
+            Populares()
           ],
         ),
       ),
