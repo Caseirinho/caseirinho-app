@@ -6,12 +6,15 @@ class MyTextField extends StatelessWidget {
   final hintText;
   final onChanged;
 
+  final sufixIcon;
+
   const MyTextField({
     Key key,
     this.labelText,
     this.onChanged,
     this.obscureText = false,
     this.hintText = "",
+    this.sufixIcon,
   }) : super(key: key);
 
   @override
@@ -22,8 +25,10 @@ class MyTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
+        suffixIcon: sufixIcon,
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
       ),
     );
   }
