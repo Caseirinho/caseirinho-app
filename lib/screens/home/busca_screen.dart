@@ -1,3 +1,5 @@
+import 'package:caseirinho_app/components/my_flat_button.dart';
+import 'package:caseirinho_app/screens/home/components/bullet.dart';
 import 'package:caseirinho_app/screens/home/components/categorias.dart';
 import 'package:caseirinho_app/screens/home/components/section_title.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,8 @@ class BuscaScreen extends StatefulWidget {
 class _BuscaScreenState extends State<BuscaScreen> {
   String textoBusca;
   List resultadoBusca;
+  double filtroDistancia = 1.0;
+  bool filtroDistanciaAplicado = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +79,12 @@ class _BuscaScreenState extends State<BuscaScreen> {
   efetuaBusca(v) {
     setState(() {
       textoBusca = v;
+      filtroDistanciaAplicado = false;
+      filtroDistancia = 0.5;
+
       if (isBlank(textoBusca)) {
         resultadoBusca = null;
-      } else {
+      } else if (textoBusca == 'bolo') {
         resultadoBusca = [
           {
             "nome": "Cheese cake tradicional",
@@ -93,7 +100,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
             "pic": "assets/cupcake.jpg",
             "avaliacao": 4.8,
             "categoria": "Bolos",
-            "distancia": 0.8,
+            "distancia": 1.3,
           },
           {
             "nome": "Bolo de chocolate trufado",
@@ -104,6 +111,8 @@ class _BuscaScreenState extends State<BuscaScreen> {
             "distancia": 0.6,
           },
         ];
+      } else {
+        resultadoBusca = [];
       }
     });
   }
@@ -118,12 +127,13 @@ class _BuscaScreenState extends State<BuscaScreen> {
   }
 
   Widget renderResultadoBuscaList() {
+    var busca = resultadoBuscaFiltrado();
     return Column(
       children: [
         renderFiltros(),
         Expanded(
           child: ListView.builder(
-            itemCount: resultadoBusca.length,
+            itemCount: busca.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
@@ -142,7 +152,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                         width: 100,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(resultadoBusca[index]["pic"]),
+                            image: AssetImage(busca[index]["pic"]),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -156,14 +166,14 @@ class _BuscaScreenState extends State<BuscaScreen> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: Text(
-                                resultadoBusca[index]["nome"],
+                                busca[index]["nome"],
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
                             ),
                             Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Text(
-                                  "Feito por: ${resultadoBusca[index]["casa"]}",
+                                  "Feito por: ${busca[index]["casa"]}",
                                   style: Theme.of(context).textTheme.subtitle2,
                                 )),
                             Row(
@@ -172,7 +182,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                                   Icons.star,
                                   size: 15,
                                 ),
-                                Text(resultadoBusca[index]["avaliacao"].toString()),
+                                Text(busca[index]["avaliacao"].toString()),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
@@ -181,7 +191,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                                     size: 3,
                                   ),
                                 ),
-                                Text(resultadoBusca[index]["categoria"]),
+                                Text(busca[index]["categoria"]),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
@@ -190,7 +200,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                                     size: 3,
                                   ),
                                 ),
-                                Text(resultadoBusca[index]["distancia"].toString() +
+                                Text(busca[index]["distancia"].toString() +
                                     " Km"),
                               ],
                             ),
@@ -208,6 +218,63 @@ class _BuscaScreenState extends State<BuscaScreen> {
     );
   }
 
+  void aplicaFiltroDistancia() {
+    setState(() {
+      filtroDistanciaAplicado = true;
+    });
+  }
+
+  List resultadoBuscaFiltrado() {
+    var buscaFiltrada = resultadoBusca;
+    if (filtroDistanciaAplicado)
+      buscaFiltrada = buscaFiltrada
+          .where((element) => element['distancia'] <= filtroDistancia)
+          .toList();
+    return buscaFiltrada;
+  }
+
+  void showFiltroDistancia(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return StatefulBuilder(builder: (context, setState) {
+            return Container(
+              padding: EdgeInsets.all(30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "Distância",
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  SizedBox(height: 20),
+                  Text("Menos de $filtroDistancia Km"),
+                  Slider(
+                    value: filtroDistancia,
+                    min: 0.5,
+                    max: 5.0,
+                    divisions: 9,
+                    label: filtroDistancia.toString() + " km",
+                    onChanged: (double value) {
+                      setState(() {
+                        filtroDistancia = value;
+                      });
+                    },
+                  ),
+                  MyFlatButton(
+                    label: "Filtrar",
+                    onPressed: () {
+                      aplicaFiltroDistancia();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            );
+          });
+        });
+  }
+
   Widget renderFiltros() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -219,7 +286,14 @@ class _BuscaScreenState extends State<BuscaScreen> {
             SizedBox(
               width: 10,
             ),
-            Bullet(title: "Distância"),
+            Bullet(
+              title: "Distância",
+              onPress: () => showFiltroDistancia(context),
+              active: filtroDistanciaAplicado,
+              onDismiss: () => setState(() {
+                filtroDistanciaAplicado = false;
+              }),
+            ),
             SizedBox(
               width: 10,
             ),
@@ -229,43 +303,6 @@ class _BuscaScreenState extends State<BuscaScreen> {
             ),
             Bullet(title: "Prazo"),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class Bullet extends StatelessWidget {
-  final title;
-  final active;
-  final onPress;
-
-  const Bullet({
-    Key key,
-    this.title,
-    this.active = false,
-    this.onPress,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: active ? Colors.grey.shade400 : Colors.redAccent,
-      onTap: onPress,
-      child: Container(
-        height: 30,
-        width: 100,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          color: active ? Colors.redAccent : Colors.grey.shade400,
-        ),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
         ),
       ),
     );
