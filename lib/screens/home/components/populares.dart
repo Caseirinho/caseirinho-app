@@ -8,11 +8,10 @@ class Populares extends StatelessWidget {
         Row(
           children: [
             buildPopulares("Brigadeiros da vó", AssetImage('assets/brigadeiro.jpg')),
-
+            SizedBox(width: 5,),
             buildPopulares("Alzira bordado", AssetImage('assets/bordado.jpg')),
-
+            SizedBox(width: 5,),
             buildPopulares("Amigurumi da Má", AssetImage('assets/amigurumi.jpg')),
-
           ],
         ),
       ],
