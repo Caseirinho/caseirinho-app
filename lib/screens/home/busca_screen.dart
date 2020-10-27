@@ -80,24 +80,27 @@ class _BuscaScreenState extends State<BuscaScreen> {
       } else {
         resultadoBusca = [
           {
-            "nome": "Brigadeiros da vó",
-            "pic": "assets/brigadeiro.jpg",
+            "nome": "Cheese cake tradicional",
+            "casa": "Maria doces e bolos",
+            "pic": "assets/cheese-cake.jpg",
             "avaliacao": 5.0,
-            "categoria": "Docinhos",
-            "distancia": 0.6,
+            "categoria": "Bolos",
+            "distancia": 0.4,
           },
           {
-            "nome": "Brigadeiros da vó",
-            "pic": "assets/brigadeiro.jpg",
-            "avaliacao": 5.0,
-            "categoria": "Docinhos",
-            "distancia": 0.6,
+            "nome": "Cupcake de morango",
+            "casa": "Brigadeira Vila Maria",
+            "pic": "assets/cupcake.jpg",
+            "avaliacao": 4.8,
+            "categoria": "Bolos",
+            "distancia": 0.8,
           },
           {
-            "nome": "Brigadeiros da vó",
-            "pic": "assets/brigadeiro.jpg",
-            "avaliacao": 5.0,
-            "categoria": "Docinhos",
+            "nome": "Bolo de chocolate trufado",
+            "casa": "Brigadeiros da vó",
+            "pic": "assets/bolo-chocolate.jpg",
+            "avaliacao": 4.5,
+            "categoria": "Bolos",
             "distancia": 0.6,
           },
         ];
@@ -139,7 +142,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                         width: 100,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(resultadoBusca[0]["pic"]),
+                            image: AssetImage(resultadoBusca[index]["pic"]),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -153,17 +156,23 @@ class _BuscaScreenState extends State<BuscaScreen> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: Text(
-                                resultadoBusca[0]["nome"],
+                                resultadoBusca[index]["nome"],
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
                             ),
+                            Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  "Feito por: ${resultadoBusca[index]["casa"]}",
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                )),
                             Row(
                               children: [
                                 Icon(
                                   Icons.star,
                                   size: 15,
                                 ),
-                                Text(resultadoBusca[0]["avaliacao"].toString()),
+                                Text(resultadoBusca[index]["avaliacao"].toString()),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
@@ -172,7 +181,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                                     size: 3,
                                   ),
                                 ),
-                                Text(resultadoBusca[0]["categoria"]),
+                                Text(resultadoBusca[index]["categoria"]),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
@@ -181,7 +190,7 @@ class _BuscaScreenState extends State<BuscaScreen> {
                                     size: 3,
                                   ),
                                 ),
-                                Text(resultadoBusca[0]["distancia"].toString() +
+                                Text(resultadoBusca[index]["distancia"].toString() +
                                     " Km"),
                               ],
                             ),
