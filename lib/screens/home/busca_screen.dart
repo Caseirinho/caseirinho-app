@@ -1,6 +1,7 @@
 import 'package:caseirinho_app/components/my_flat_button.dart';
 import 'package:caseirinho_app/screens/home/components/bullet.dart';
 import 'package:caseirinho_app/screens/home/components/categorias.dart';
+import 'package:caseirinho_app/screens/home/components/mapa_busca.dart';
 import 'package:caseirinho_app/screens/home/components/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -64,7 +65,9 @@ class _BuscaScreenState extends State<BuscaScreen> {
                       resultadoBusca.isEmpty
                           ? Center(child: Text("Nenhum item encontrado"))
                           : renderResultadoBuscaList(),
-                      Center(child: Text("Nenhum item encontrado")),
+                      resultadoBusca.isEmpty
+                          ? Center(child: Text("Nenhum item encontrado"))
+                          : MapaBusca(),
                     ],
                   ),
                 ),
