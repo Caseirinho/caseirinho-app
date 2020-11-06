@@ -1,3 +1,5 @@
+import 'package:caseirinho_app/screens/casa.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Populares extends StatelessWidget {
@@ -7,20 +9,30 @@ class Populares extends StatelessWidget {
       children: [
         Row(
           children: [
-            buildPopulares("Brigadeiros da vó", AssetImage('assets/brigadeiro.jpg')),
-            SizedBox(width: 5,),
-            buildPopulares("Alzira bordado", AssetImage('assets/bordado.jpg')),
-            SizedBox(width: 5,),
-            buildPopulares("Amigurumi da Má", AssetImage('assets/amigurumi.jpg')),
+            buildPopulares(context,
+                "Brigadeiros da vó", AssetImage('assets/brigadeiro.jpg')),
+            SizedBox(
+              width: 5,
+            ),
+            buildPopulares(
+                context, "Alzira bordado", AssetImage('assets/bordado.jpg')),
+            SizedBox(
+              width: 5,
+            ),
+            buildPopulares(context,
+                "Amigurumi da Má", AssetImage('assets/amigurumi.jpg')),
           ],
         ),
       ],
     );
   }
 
-  Flexible buildPopulares(String nome, AssetImage imagem) {
+  Flexible buildPopulares(context, String nome, AssetImage imagem) {
     return Expanded(
       child: InkWell(
+        onTap: () =>
+            Navigator.of(context)
+                .push(CupertinoPageRoute(builder: (_) => CasaScreen())),
         child: Container(
           height: 80,
           decoration: BoxDecoration(

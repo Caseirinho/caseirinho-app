@@ -1,3 +1,4 @@
+import 'package:caseirinho_app/screens/home/home_navigator.dart';
 import 'package:caseirinho_app/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.lightBlueAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      home: HomeNavigator(),
     );
   }
 }
