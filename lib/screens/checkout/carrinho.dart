@@ -1,5 +1,8 @@
-import 'package:caseirinho_app/screens/checkout/promo_item.dart';
+import 'package:caseirinho_app/stores/carrinho.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 
 const Color darkGrey = Color(0xff202020);
 
@@ -14,6 +17,9 @@ const List<BoxShadow> shadow = [
 ];
 
 class CarrinhoScreen extends StatelessWidget {
+  final carrinho = GetIt.I<Carrinho>();
+  final reaisFormat = new NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
+
   @override
   Widget build(BuildContext context) {
     Widget payNow = InkWell(
@@ -33,7 +39,7 @@ class CarrinhoScreen extends StatelessWidget {
             ],
             borderRadius: BorderRadius.circular(9.0)),
         child: Center(
-          child: Text("Pay Now",
+          child: Text("Pagar agora",
               style: const TextStyle(
                   color: const Color(0xfffefefe),
                   fontWeight: FontWeight.w600,
@@ -53,79 +59,78 @@ class CarrinhoScreen extends StatelessWidget {
                       constraints: BoxConstraints(
                         minHeight: constraints.maxHeight,
                       ),
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: kToolbarHeight),
-                          child: Column(children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    'Unpaid',
+                      child: Column(children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                'Carrinho',
+                                style: TextStyle(
+                                  color: darkGrey,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              CloseButton()
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(16.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: shadow,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10))),
+                          child: Observer(builder: (context) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Column(
+                                  children: carrinho.itens
+                                      .map((item) => ListTile(
+                                            title:
+                                                Text('${item.quantidade} ☓ ${item.nome}'),
+                                            trailing: Text(reaisFormat.format(item.valor)),
+                                          ))
+                                      .toList(),
+                                ),
+                                ListTile(
+                                  title: Text('Entrega'),
+                                  trailing: Text(reaisFormat.format(carrinho.entrega)),
+                                ),
+                                Divider(),
+                                ListTile(
+                                  title: Text(
+                                    'Total',
                                     style: TextStyle(
-                                      color: darkGrey,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  CloseButton()
-                                ],
-                              ),
-                            ),
-                            PromoItem(),
-                            Container(
-                              margin: const EdgeInsets.all(16.0),
-                              padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: shadow,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10))),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  ListTile(
-                                    title: Text('Boat Rockerz 350 On-Ear ..'),
-                                    trailing: Text('74.68'),
-                                  ),
-                                  ListTile(
-                                    title: Text('Tax'),
-                                    trailing: Text('1.25'),
-                                  ),
-                                  ListTile(
-                                    title: Text('Subtotal'),
-                                    trailing: Text('76.93'),
-                                  ),
-                                  ListTile(
-                                    title: Text('Promocode'),
-                                    trailing: Text('-10.93'),
-                                  ),
-                                  Divider(),
-                                  ListTile(
-                                    title: Text('Total',style:
-                                    TextStyle(
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold
-                                    ),),
-                                    trailing: Text('\$ 66.93',style:
-                                    TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  trailing: Text(
+                                    reaisFormat.format(carrinho.valorTotal),
+                                    style: TextStyle(
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold
-                                    ),),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: payNow,
-                            )
-                          ]))))),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ],
+                            );
+                          }),
+                        ),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: payNow,
+                        )
+                      ])))),
         ));
   }
 }

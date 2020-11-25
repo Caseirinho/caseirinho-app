@@ -2,8 +2,10 @@ import 'package:caseirinho_app/components/my_flat_button.dart';
 import 'package:caseirinho_app/components/my_text_field.dart';
 import 'package:caseirinho_app/components/number_inc_dec.dart';
 import 'package:caseirinho_app/screens/checkout/carrinho.dart';
+import 'package:caseirinho_app/stores/carrinho.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 
 class ProdutoScreen extends StatefulWidget {
@@ -16,6 +18,8 @@ class ProdutoScreen extends StatefulWidget {
 }
 
 class _ProdutoScreenState extends State<ProdutoScreen> {
+  final carrinho = GetIt.I<Carrinho>();
+
   int quantidade = 1;
   final reaisFormat = new NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
 
@@ -78,7 +82,7 @@ class _ProdutoScreenState extends State<ProdutoScreen> {
                       Expanded(
                         child: MyFlatButton(
                           label: "Adicionar",
-                          onPressed: () => null,
+                          onPressed: () => addCarrinho(context),
                         ),
                       )
                     ],
@@ -92,7 +96,7 @@ class _ProdutoScreenState extends State<ProdutoScreen> {
     );
   }
 
-  openCarrinho(context) {
+  addCarrinho(context) {
     var openFromBottom = (context, animation, secondaryAnimation, child) {
       var begin = Offset(0.0, 1.0);
       var end = Offset.zero;
@@ -106,7 +110,15 @@ class _ProdutoScreenState extends State<ProdutoScreen> {
       );
     };
 
-    Navigator.push(
+    carrinho.addItem(
+      this.widget.item["nome"],
+      this.widget.item["descricao"],
+      this.widget.item["pic"],
+      this.widget.item["preco"],
+      quantidade,
+    );
+
+    Navigator.pushReplacement(
       context,
       PageRouteBuilder(
         pageBuilder: (_, __, ___) => CarrinhoScreen(),

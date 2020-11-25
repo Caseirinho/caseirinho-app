@@ -10,7 +10,7 @@ const brigadeiros = [
     "nome": "Brigadeiro belga",
     "pic": "assets/brigadeiros/belga.webp",
     "descricao": "O delicioso brigadeiro da vó com chocolate belga ao leite.",
-    "preco": 6,
+    "preco": 6.0,
   },
   {
     "nome": "Brigadeiro de ovomaltine",
@@ -48,7 +48,7 @@ const brigadeiros = [
     "pic": "assets/brigadeiros/mms.jpg",
     "descricao":
         "O incrível brigadeiro da vó recheado com os confeitos mais queridos do mundo.",
-    "preco": 6,
+    "preco": 6.0,
   },
 ];
 

@@ -1,9 +1,12 @@
 import 'package:caseirinho_app/screens/home/home_navigator.dart';
-import 'package:caseirinho_app/screens/login/login.dart';
+import 'package:caseirinho_app/stores/carrinho.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  GetIt getIt = GetIt.I;
+  getIt.registerSingleton<Carrinho>(Carrinho());
   runApp(MyApp());
 }
 
