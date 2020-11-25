@@ -8,7 +8,7 @@ abstract class _Endereco with Store {
   _Endereco();
 
   @observable
-  String nome = '';
+  String cep = '';
 
   @observable
   String logradouro = '';

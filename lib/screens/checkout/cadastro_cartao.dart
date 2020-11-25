@@ -1,9 +1,11 @@
 import 'package:caseirinho_app/components/my_flat_button.dart';
 import 'package:caseirinho_app/components/my_text_field.dart';
 import 'package:caseirinho_app/screens/checkout/resumo_compra.dart';
+import 'package:caseirinho_app/stores/carrinho.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CadastroCartaoScreen extends StatefulWidget {
@@ -25,6 +27,15 @@ class _CadastroCartaoScreenState extends State<CadastroCartaoScreen> {
   TextEditingController validade = TextEditingController();
 
   TextEditingController cvv = TextEditingController();
+
+  final carrinho = GetIt.I<Carrinho>();
+
+  salvaCartao() {
+    carrinho.cartao.numero = numero.text;
+    carrinho.cartao.nome = nome.text;
+    carrinho.cartao.validade = validade.text;
+    carrinho.cartao.cvv = cvv.text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +108,8 @@ class _CadastroCartaoScreenState extends State<CadastroCartaoScreen> {
               SizedBox(height: 16),
               MyFlatButton(
                 label: "Continuar para resumo da compra",
-                onPressed: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (_) => ResumoCompraScreen()),
-                ),
-              )
+                onPressed: () => efetuaCompra(context),
+              ),
             ],
           ),
         ),
@@ -162,6 +170,12 @@ class _CadastroCartaoScreenState extends State<CadastroCartaoScreen> {
         ],
       ),
     );
+  }
+
+  efetuaCompra(BuildContext context) {
+    salvaCartao();
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (_) => ResumoCompraScreen()));
   }
 }
 

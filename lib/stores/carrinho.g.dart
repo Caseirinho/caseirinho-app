@@ -47,6 +47,36 @@ mixin _$Carrinho on _Carrinho, Store {
     });
   }
 
+  final _$enderecoAtom = Atom(name: '_Carrinho.endereco');
+
+  @override
+  Endereco get endereco {
+    _$enderecoAtom.reportRead();
+    return super.endereco;
+  }
+
+  @override
+  set endereco(Endereco value) {
+    _$enderecoAtom.reportWrite(value, super.endereco, () {
+      super.endereco = value;
+    });
+  }
+
+  final _$cartaoAtom = Atom(name: '_Carrinho.cartao');
+
+  @override
+  Cartao get cartao {
+    _$cartaoAtom.reportRead();
+    return super.cartao;
+  }
+
+  @override
+  set cartao(Cartao value) {
+    _$cartaoAtom.reportWrite(value, super.cartao, () {
+      super.cartao = value;
+    });
+  }
+
   final _$_CarrinhoActionController = ActionController(name: '_Carrinho');
 
   @override
@@ -66,6 +96,8 @@ mixin _$Carrinho on _Carrinho, Store {
     return '''
 itens: ${itens},
 entrega: ${entrega},
+endereco: ${endereco},
+cartao: ${cartao},
 valorTotal: ${valorTotal}
     ''';
   }

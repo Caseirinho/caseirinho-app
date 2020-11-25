@@ -46,15 +46,15 @@ class _HomeNavigatorState extends State<HomeNavigator> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text("Início"),
+          label: "Início",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
-          title: Text("Busca"),
+          label: "Busca",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text('Conta'),
+          label: "Conta",
         )
       ],
     );

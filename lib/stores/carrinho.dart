@@ -1,6 +1,9 @@
 import 'package:caseirinho_app/stores/item_carrinho.dart';
 import 'package:mobx/mobx.dart';
 
+import 'cartao.dart';
+import 'endereco.dart';
+
 // Include generated file
 part 'carrinho.g.dart';
 
@@ -15,12 +18,22 @@ abstract class _Carrinho with Store {
   @observable
   double entrega = 2.0;
 
+  @observable
+  Endereco endereco = Endereco();
+
+  @observable
+  Cartao cartao = Cartao();
+
   @action
   void addItem(nome, descricao, pic, double valorIndividual, int quantidade) {
     itens.add(ItemCarrinho(nome, descricao, pic, valorIndividual, quantidade));
   }
 
   @computed
-  double get valorTotal => itens.fold(
-      0.0, (previousValue, element) => previousValue + element.valor) + entrega;
+  double get valorTotal =>
+      itens.fold(
+        0.0,
+        (previousValue, element) => previousValue + element.valor,
+      ) +
+      entrega;
 }

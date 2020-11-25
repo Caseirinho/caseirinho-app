@@ -1,13 +1,35 @@
 import 'package:caseirinho_app/components/my_flat_button.dart';
 import 'package:caseirinho_app/components/my_text_field.dart';
+import 'package:caseirinho_app/stores/carrinho.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import 'cadastro_cartao.dart';
 
 class CadastroEnderecoScreen extends StatelessWidget {
   final cepFormatter = MaskTextInputFormatter(mask: "#####-###");
+
+  final cep = TextEditingController();
+  final logradouro = TextEditingController();
+  final numero = TextEditingController();
+  final complemento = TextEditingController();
+  final bairro = TextEditingController();
+  final cidade = TextEditingController();
+  final uf = TextEditingController();
+
+  final Carrinho carrinho = GetIt.I<Carrinho>();
+
+  salvaEndereco() {
+    carrinho.endereco.cep = cep.text;
+    carrinho.endereco.logradouro = logradouro.text;
+    carrinho.endereco.numero = numero.text;
+    carrinho.endereco.complemento = complemento.text;
+    carrinho.endereco.bairro = bairro.text;
+    carrinho.endereco.cidade = cidade.text;
+    carrinho.endereco.uf = uf.text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +55,14 @@ class CadastroEnderecoScreen extends StatelessWidget {
             children: [
               MyTextField(
                 labelText: "CEP",
+                controller: cep,
                 inputFormatters: [cepFormatter],
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 16),
               MyTextField(
                 labelText: "Logradouro",
+                controller: logradouro,
               ),
               SizedBox(height: 16),
               Flexible(
@@ -48,6 +72,7 @@ class CadastroEnderecoScreen extends StatelessWidget {
                       flex: 1,
                       child: MyTextField(
                         labelText: "Número",
+                        controller: numero,
                       ),
                     ),
                     SizedBox(width: 8),
@@ -55,6 +80,7 @@ class CadastroEnderecoScreen extends StatelessWidget {
                       flex: 1,
                       child: MyTextField(
                         labelText: "Complemento",
+                        controller: complemento,
                       ),
                     ),
                   ],
@@ -63,25 +89,35 @@ class CadastroEnderecoScreen extends StatelessWidget {
               SizedBox(height: 16),
               MyTextField(
                 labelText: "Bairro",
+                controller: bairro,
               ),
               SizedBox(height: 16),
               MyTextField(
                 labelText: "Cidade",
+                controller: cidade,
               ),
               SizedBox(height: 16),
               MyTextField(
                 labelText: "UF",
+                controller: uf,
               ),
               SizedBox(height: 32),
               MyFlatButton(
                 label: "Continuar para pagamento",
-                onPressed: () => Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => CadastroCartaoScreen())),
+                onPressed: () => continuarPagamento(context),
               )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  continuarPagamento(BuildContext context) {
+    salvaEndereco();
+    Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (_) => CadastroCartaoScreen()),
     );
   }
 }

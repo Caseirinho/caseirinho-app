@@ -9,18 +9,18 @@ part of 'endereco.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Endereco on _Endereco, Store {
-  final _$nomeAtom = Atom(name: '_Endereco.nome');
+  final _$cepAtom = Atom(name: '_Endereco.cep');
 
   @override
-  String get nome {
-    _$nomeAtom.reportRead();
-    return super.nome;
+  String get cep {
+    _$cepAtom.reportRead();
+    return super.cep;
   }
 
   @override
-  set nome(String value) {
-    _$nomeAtom.reportWrite(value, super.nome, () {
-      super.nome = value;
+  set cep(String value) {
+    _$cepAtom.reportWrite(value, super.cep, () {
+      super.cep = value;
     });
   }
 
@@ -117,7 +117,7 @@ mixin _$Endereco on _Endereco, Store {
   @override
   String toString() {
     return '''
-nome: ${nome},
+cep: ${cep},
 logradouro: ${logradouro},
 numero: ${numero},
 complemento: ${complemento},

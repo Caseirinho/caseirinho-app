@@ -13,7 +13,7 @@ class _ConfirmacaoCompraScreenState extends State<ConfirmacaoCompraScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 10), () {
+    Future.delayed(Duration(seconds: 5), () {
       setState(() {
         loading = false;
       });

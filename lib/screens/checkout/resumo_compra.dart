@@ -156,17 +156,18 @@ class ResumoCompraScreen extends StatelessWidget {
       ),
       child: Observer(
         builder: (context) {
+          var endereco = carrinho.endereco;
           return Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text('R. Padre Manuel Barreto, 114'),
+                Text("${endereco.logradouro}, ${endereco.numero}"),
                 SizedBox(height: 8),
-                Text('Artur Alvim'),
+                Text(endereco.bairro),
                 SizedBox(height: 8),
-                Text('São Paulo - SP'),
+                Text('${endereco.cidade} - ${endereco.uf}'),
               ],
             ),
           );
@@ -206,7 +207,7 @@ class ResumoCompraScreen extends StatelessWidget {
                     Flexible(
                       child: Center(
                         child: Text(
-                          "5555 xxxx xxxxx 1234",
+                          carrinho.cartao.numeroMascarado,
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -219,7 +220,7 @@ class ResumoCompraScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 16.0),
                 Text(
-                  "RAFAEL R BRAZ",
+                  carrinho.cartao.nome,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
