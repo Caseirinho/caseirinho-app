@@ -32,11 +32,26 @@ mixin _$Carrinho on _Carrinho, Store {
     });
   }
 
+  final _$entregaAtom = Atom(name: '_Carrinho.entrega');
+
+  @override
+  double get entrega {
+    _$entregaAtom.reportRead();
+    return super.entrega;
+  }
+
+  @override
+  set entrega(double value) {
+    _$entregaAtom.reportWrite(value, super.entrega, () {
+      super.entrega = value;
+    });
+  }
+
   final _$_CarrinhoActionController = ActionController(name: '_Carrinho');
 
   @override
   void addItem(dynamic nome, dynamic descricao, dynamic pic,
-      dynamic valorIndividual, dynamic quantidade) {
+      double valorIndividual, int quantidade) {
     final _$actionInfo =
         _$_CarrinhoActionController.startAction(name: '_Carrinho.addItem');
     try {
@@ -50,6 +65,7 @@ mixin _$Carrinho on _Carrinho, Store {
   String toString() {
     return '''
 itens: ${itens},
+entrega: ${entrega},
 valorTotal: ${valorTotal}
     ''';
   }

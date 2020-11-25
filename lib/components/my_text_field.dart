@@ -7,6 +7,8 @@ class MyTextField extends StatelessWidget {
   final onChanged;
   final sufixIcon;
   final maxLines;
+  final inputFormatters;
+  final keyboardType;
 
   const MyTextField({
     Key key,
@@ -16,14 +18,18 @@ class MyTextField extends StatelessWidget {
     this.hintText = "",
     this.sufixIcon,
     this.maxLines,
+    this.inputFormatters,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLines,
+      inputFormatters: inputFormatters,
       onChanged: onChanged,
       obscureText: this.obscureText,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

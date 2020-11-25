@@ -1,3 +1,4 @@
+import 'package:caseirinho_app/screens/checkout/cadastro_endereco.dart';
 import 'package:caseirinho_app/stores/carrinho.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -23,8 +24,8 @@ class CarrinhoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget payNow = InkWell(
-//      onTap: () => Navigator.of(context)
-//          .push(MaterialPageRoute(builder: (_) => ViewProductPage())),
+     onTap: () => Navigator.of(context)
+         .push(MaterialPageRoute(builder: (_) => CadastroEnderecoScreen())),
       child: Container(
         height: 80,
         width: MediaQuery.of(context).size.width / 1.5,
@@ -39,7 +40,7 @@ class CarrinhoScreen extends StatelessWidget {
             ],
             borderRadius: BorderRadius.circular(9.0)),
         child: Center(
-          child: Text("Pagar agora",
+          child: Text("Fechar carrinho",
               style: const TextStyle(
                   color: const Color(0xfffefefe),
                   fontWeight: FontWeight.w600,
