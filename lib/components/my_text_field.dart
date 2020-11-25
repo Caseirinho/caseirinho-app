@@ -10,6 +10,8 @@ class MyTextField extends StatelessWidget {
   final inputFormatters;
   final keyboardType;
 
+  final controller;
+
   const MyTextField({
     Key key,
     this.labelText,
@@ -20,6 +22,7 @@ class MyTextField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.keyboardType,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -30,6 +33,7 @@ class MyTextField extends StatelessWidget {
       onChanged: onChanged,
       obscureText: this.obscureText,
       keyboardType: keyboardType,
+      controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

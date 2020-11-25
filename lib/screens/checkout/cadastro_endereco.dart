@@ -1,14 +1,16 @@
 import 'package:caseirinho_app/components/my_flat_button.dart';
 import 'package:caseirinho_app/components/my_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import 'cadastro_cartao.dart';
 
 class CadastroEnderecoScreen extends StatelessWidget {
   final cepFormatter = MaskTextInputFormatter(mask: "#####-###");
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -72,8 +74,9 @@ class CadastroEnderecoScreen extends StatelessWidget {
               ),
               SizedBox(height: 32),
               MyFlatButton(
-                label: "Continuar",
-                onPressed: () => null,
+                label: "Continuar para pagamento",
+                onPressed: () => Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => CadastroCartaoScreen())),
               )
             ],
           ),
